@@ -24,8 +24,8 @@ import AudioTile from './AudioTile/AudioTile.svelte';
 
 <div>
 	<h3>Selected dir: {selectedDirectory}</h3>
-	<button on:click={setAudioDir}>Select audio dir</button>
-	<div class="grid grid-flow-col auto-cols-min grid-rows-auto-fill place-content-evenly bg-slate-500 gap-3 w-max">
+	<button on:click={setAudioDir} class="bg-stone-500 rounded-md p-2">Select audio dir</button>
+	<div class="grid grid-flow-col auto-cols-min grid-rows-auto-fill place-content-evenly gap-3 w-max">
 		{#each files as file (file.name)}
 			<AudioTile {...file} />
 		{/each}
