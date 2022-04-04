@@ -1,8 +1,9 @@
 <script lang="ts">
-	import Tag from '../Tag.svelte';
-  import Fa from 'svelte-fa/src/fa.svelte';
-  import {faPlay, faPause} from '@fortawesome/free-solid-svg-icons'
+import Tag from './components/Tag.svelte';
 import Progress from './components/Progress.svelte';
+import ReplayButton from './components/ReplayButton.svelte';
+import PlayPauseButton from './components/PlayPauseButton.svelte';
+import VolumeSlider from './components/VolumeSlider.svelte';
 
 	export let name: string;
 	export let file;
@@ -26,7 +27,7 @@ import Progress from './components/Progress.svelte';
 </script>
 
 <div
-	class="inline-grid align-baseline h-72 w-72 bg-zinc-400 rounded-md relative grid-cols-audio-tile grid-rows-audio-tile pt-5"
+	class="inline-flex align-baseline h-72 w-72 bg-zinc-400 rounded-md relative"
 >
   <audio 
     bind:this={audio}
@@ -38,19 +39,9 @@ import Progress from './components/Progress.svelte';
   />
 
 	<Tag text={name} />
-  <div class="flex cursor-pointer w-[100%] h-[100%]" on:click={playPause}>
-    <Fa icon={paused ? faPlay : faPause} size="5x" class="m-auto"/>
-  </div>  
-  
-  <input type="range" name="volume" min="0" max="1" step="0.001" bind:value={volume} class="h-[100%] w-[20%] justify-self-center"/>
-  
-  <Progress progress={(playedTime/totalDur) * 100||0} class=""/>
+  <PlayPauseButton bind:paused={paused} playPause={playPause}/>
+  <VolumeSlider bind:volume={volume} class=""/>
+  <Progress progress={(playedTime/totalDur) * 100||0}/>
 
 </div>
 
-<style>
-  input[type="range"] {
-  writing-mode: bt-lr;
-  -webkit-appearance: slider-vertical;
-}
-</style>
